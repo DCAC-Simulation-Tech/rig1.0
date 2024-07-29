@@ -1,0 +1,181 @@
+/* Import the Poppins font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+/* Basic reset for margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Initial low-resolution background */
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url("/media/lowVRgaming.jpg") no-repeat center top/cover;
+}
+
+/* High-resolution background to be added later */
+.high-res-background {
+  background: url("/media/person-wearing-futuristic-virtual-reality-glasses-gaming.jpg")
+    no-repeat center top/cover;
+  background-size: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Background overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); Dark overlay
+}
+
+/* Center content container */
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+/* Style for the logo */
+.logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Style for the main heading */
+.center-content h1 {
+  font-size: 36px; /* Slightly smaller font size */
+  font-weight: 700; /* Bold text */
+  margin-bottom: 20px;
+}
+
+/* Style for the main span */
+.center-content span {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+/* Style for the buttons container */
+.buttons {
+  margin-top: 20px;
+}
+
+/* Style for the buttons */
+.buttons button {
+  padding: 15px 30px;
+  font-size: 18px;
+  color: white;
+  background-color: #ff6800;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 5px;
+}
+
+.buttons button:hover {
+  background-color: #ed6b21;
+}
+
+/* Modal background */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal content */
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+form button {
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+/* #comments-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#comments-section h4 {
+  color: white;
+}
+ */
+
+#comments {
+  color: #ff6800;
+}
+
+/* 
+#comments div {
+  padding: 4px;
+} */
