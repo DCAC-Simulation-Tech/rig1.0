@@ -11,39 +11,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die(json_encode(['success' => false, 'message' => 'Database connection failed.']));
     }
 
+    // Check for duplicate email
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM waitlist WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
 
- // Check for duplicate email
- $stmt = $conn->prepare("SELECT COUNT(*) FROM waitlist WHERE email = ?");
- $stmt->bind_param("s", $email);
- $stmt->execute();
- $stmt->bind_result($count);
- $stmt->fetch();
- $stmt->close();
+    if ($count > 0) {
+        echo json_encode(['success' => false, 'message' => 'This email is already registered.']);
+        $conn->close();
+        exit();
+    }
 
- if ($count > 0) {
-     echo json_encode(['success' => false, 'message' => 'This email is already registered.']);
-     $conn->close();
-     exit();
- }
+    // Send email
+    $to = $email;
+    $subject = "Thank you for joining the waitlist!";
+    $message = "Hi $name, thank you for joining our waitlist. We will keep you updated.";
+    $headers = "From: no-reply@therigvrarcade.com";
 
- // Send email
- $to = $email;
- $subject = "Thank you for joining the waitlist!";
- $message = "Hi $name, thank you for joining our waitlist. We will keep you updated.";
- $headers = "From: no-reply@therigvrarcade.com";
+    mail($to, $subject, $message, $headers);
 
- mail($to, $subject, $message, $headers);
+    // Save to database
+    $stmt = $conn->prepare("INSERT INTO waitlist (name, email, phone, comments) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $email, $phone, $comments);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
 
- // Save to database
- $stmt = $conn->prepare("INSERT INTO waitlist (name, email, phone, comments) VALUES (?, ?, ?, ?)");
- $stmt->bind_param("ssss", $name, $email, $phone, $comments);
- $stmt->execute();
- $stmt->close();
- $conn->close();
-
- echo json_encode(['success' => true]);
+    echo json_encode(['success' => true]);
+    
 } else {
- echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+  
 }
 
 ?>
